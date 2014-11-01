@@ -10,7 +10,7 @@
     <link href="./javascripts/lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="./stylesheets/style.css" rel="stylesheet">
 </head>
-<html ng-app="page-app">
+<html ng-app="myApp">
 <body ng-controller="PageCtl">
 
 
@@ -32,6 +32,12 @@
                 <li>
                     <a class="green-button" href="javascript:" ng-click="newResponse()">I know this!</a>
                 </li>
+                <li>
+                    <a class="blue-button" href="javascript:" ng-click="proceed()">Proceed, I'm good</a>
+                </li>
+                <li style="visibility: hidden;">
+                    <a id="hiddenTrigger" ng-click="triggerAuto()">Proceed, I'm good</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -42,13 +48,15 @@
             <h3>{{model.currentQuestion.question}}</h3>
             <ul class="answer-list">
                 <li ng-repeat="answer in model.currentQuestion.answers" class="answer-option"
-                    ng-click="validateAnswer()">
+                    ng-click="validateAnswer(answer)"
+                        ng-class="answer.colorRed ? 'red' : answer.colorGreen ? 'green' : '' ">
                     <div class="row">
                         <div class="col-xs-4">
                             <img ng-src="./images/{{answer.image}}"/>
                         </div>
                         <div class="col-xs-8">
                             <p>{{answer.explanation}}</p>
+                            <p ng-show="answer.colorRed || answer.colorGreen" class="followUp">{{answer.followUp}}</p>
                         </div>
                     </div>
                 </li>

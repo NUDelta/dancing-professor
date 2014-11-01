@@ -50,6 +50,15 @@ a, a:hover {
   color: #d4ffd8;
 }
 
+.blue-button {
+  background-color: #a5e5ff;
+}
+
+.blue-button:hover {
+  background-color: #c0d1ff;
+  color: #d4ffd8;
+}
+
 .vid-actions {
   list-style: none;
   padding-left: 0;
@@ -76,4 +85,17 @@ li.answer-option {
   border-radius: 3px;
   margin-bottom: 2em;
   cursor: pointer;
+}
+
+li.answer-option.red {
+  background-color: lightcoral;
+}
+li.answer-option.green {
+  background-color: lightgreen;
+}
+
+li.answer-option .followUp{
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
