@@ -33,28 +33,28 @@
                     <a class="green-button" href="javascript:" ng-click="newResponse()">I know this!</a>
                 </li>
             </ul>
-
         </div>
     </div>
 
     <div class="row" ng-show="answersVisible">
         <div class="col-xs-12">
             <hr/>
-            <h3>Question text here?</h3>
+            <h3>{{model.currentQuestion.question}}</h3>
             <ul class="answer-list">
-                <li class="answer-option" ng-click="validateAnswer()">
-
-                </li>
-                <li class="answer-option">
-
-                </li>
-                <li class="answer-option">
-
+                <li ng-repeat="answer in model.currentQuestion.answers" class="answer-option"
+                    ng-click="validateAnswer()">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <img ng-src="./images/{{answer.image}}"/>
+                        </div>
+                        <div class="col-xs-8">
+                            <p>{{answer.explanation}}</p>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
-
 
 
 </div>

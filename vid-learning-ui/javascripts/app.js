@@ -1,6 +1,24 @@
 var model = {
-  totalSelectMap: {},
-  currentSelectMap: {}
+  currentQuestion: {
+    question: "What is the kinetic energy for a .250 kg ball traveling at .51 m/sec?",
+    answers: [
+      {
+        image: "answer-2-moderate.png",
+        explanation: "Melius principes concludaturque sed ne, idque luptatum efficiantur vim no, vis an postea vidisse omittantur. Cum cu alia harum praesent, ad etiam clita mel, eam et alii meliore platonem. Ipsum efficiantur qui ei. Te vero magna dicam sit. Ius volumus appellantur in, ut ius tamquam adolescens, sit cu ipsum evertitur reprimique.",
+        correct: false
+      },
+      {
+        image: "answer-3-bad.png",
+        explanation: "this is why",
+        correct: false
+      },
+      {
+        image: "answer-1-best.png",
+        explanation: "this is why",
+        correct: true
+      }
+    ]
+  }
 };
 
 var pageApp = angular.module("page-app", []);
@@ -48,8 +66,8 @@ var createPlayer = function () {
   player = new YT.Player('player', {
     height: '390',
     width: '640',
-    videoId: vid,
     quality: 'small',
+    videoId: vid,
     events: {
       'onReady': function (event) {
         event.target.playVideo();
@@ -83,5 +101,8 @@ pageApp.controller("PageCtl", function ($scope, $http) {
     alert('foo bar');
   };
 
+  $scope.validateAnswer = function (selection) {
+
+  };
 });
 
