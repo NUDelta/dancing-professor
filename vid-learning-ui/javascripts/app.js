@@ -26,7 +26,7 @@ var workerId = "";
 if (typeof params["workerId"] !== "undefined")
     workerId = params["workerId"];
 
-var vid = "2NIG1bt8aPU"; // default video ID
+var vid = "EgKXcQ9PLuc"; // default video ID
 if (params["id"]) {
     vid = params["id"]
 }
@@ -49,6 +49,7 @@ var createPlayer = function () {
     height: '390',
     width: '640',
     videoId: vid,
+    quality: 'small',
     events: {
       'onReady': function (event) {
         event.target.playVideo();
