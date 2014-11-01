@@ -32,7 +32,34 @@ var questions = [
         followUp: "This is close, but we need to square the velocity"
       }
     ]
-  }
+  },
+  {
+    question: "Which of these is the best explonation of variance?",
+    answers: [
+      {
+        image: "",
+        explanation: "Variance measures how far a set of numbers is spread out. A variance of zero indicates that all the values are identical.",
+        correct: false,
+        followUp: "Two sets of data with the same variance can have different spread of data."
+      },{
+        image: "",
+        explanation: 'Variance describes the "spread" of data in a given distribution of values. The variance of data is captured by the deviation of each value from the data\'s average. In the video, Prof. calculates individual deviations by subtracting a datapoint (x) from the overall average (x^hat) and then taking the square root (mostly just to make sure the deviations are described as positive numbers). Finally, the overall "variance" is computed by obtaining the average of the tallied deviations across all values. Thus, distributions with "high variance" mean that the values are "spread" far away from each other. On the other hand, distributions with low variance mean that the datapoints are close to each other.',
+        correct: true,
+        followUp: "Correct! Good job!"
+      },{
+        image: "",
+        explanation: "Variance is always non-negative: a small variance indicates that the data points tend to be very close to the median and hence to each other.",
+        correct: false,
+        followUp: "The variance is measured around the mean not the median."
+
+      },{
+        image: "",
+        explanation: " Variance is calculated by first calculating the mean, then subtracting the mean from every number in the list, creating a new list. To make the new list all positive and workable, you square each value then take an average of the new list."
+        correct: false,
+        followUp: "This is a definition of variance but it doesn't give intuition of what variance means."
+      }
+    ]
+  }]
 ];
 
 var pageScope = null;
