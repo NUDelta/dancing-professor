@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
   <title>The Dancing Professor</title>
+  <script src="./javascripts/lib/youtube-frame.js"></script>
+  <script src="./javascripts/lib/www-widgetapi.js"></script>
   <script src="./javascripts/lib/underscore-min.js"></script>
   <script src="./javascripts/lib/angular/angular.min.js"></script>
   <script src="./javascripts/app.js"></script>
@@ -14,7 +16,9 @@
       <h2>The Dancing Professor</h2>
     </div>
     <div class="learner">
-      <div class="col-xs-8"></div>
+      <div class="col-xs-8">
+        <div id="player"></div>
+      </div>
       <div class="col-xs-4">
         <h3>Side</h3>
       </div>

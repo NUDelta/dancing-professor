@@ -1,19 +1,38 @@
 var model = {
-  currentImage: randomPic(),
-  jobList: randomJobs(),
   totalSelectMap: {},
   currentSelectMap: {}
 };
 
-var todoApp = angular.module("page-app", []);
+var pageApp = angular.module("page-app", []);
 
-todoApp.run(function ($http) {
-//  do stuff
+var createPlayer = function () {
+  var player = new YT.Player('player', {
+    height: '390',
+    width: '640',
+    videoId: 'M7lc1UVf-VE',
+    events: {
+      'onReady': function (event) {
+        event.target.playVideo();
+        //    player.stopVideo();
+      },
+      'onStateChange': function (event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          setTimeout(function () {
+            player.pauseVideo();
+          }, 6000);
+        }
+      }
+    }
+  });
+};
+
+pageApp.run(function ($http) {
+  createPlayer();
+
+
 });
 
-
-todoApp.controller("PageCtl", function ($scope, $http) {
+pageApp.controller("PageCtl", function ($scope, $http) {
   $scope.model = model;
-
 });
 
