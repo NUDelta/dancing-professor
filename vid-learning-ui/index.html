@@ -59,5 +59,24 @@
 
 </div>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+</script>
+
+
+    <script type="text/javascript">
+        var explanationFeed;
+        $(document).ready(function()
+        {
+            $(function listLearnerExplanations()
+            {
+                $.getJSON( "https://spreadsheets.google.com/feeds/list/1g29ctzMW1bvlmwqn4cSgK9us2SWzvF4ojVnW2GcDhsE/1/public/values?alt=json",
+                function (data)
+                {
+                    explanationFeed = data.feed;
+                });
+            });
+
+        });
+    </script>
 </body>
 </html>
