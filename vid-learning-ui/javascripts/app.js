@@ -10,31 +10,31 @@ var pageApp = angular.module("page-app", []);
 var prmstr = window.location.search.substr(1);
 var prmarr = prmstr.split("&");
 var params = {};
-for ( var i = 0; i < prmarr.length; i++) {
-    var tmparr = prmarr[i].split("=");
-    params[tmparr[0]] = tmparr[1];
+for (var i = 0; i < prmarr.length; i++) {
+  var tmparr = prmarr[i].split("=");
+  params[tmparr[0]] = tmparr[1];
 }
 
 var id = params["id"];
 var isPreview = false;
 if (typeof params["assignmentId"] === "undefined" || params["assignmentId"] == "ASSIGNMENT_ID_NOT_AVAILABLE")
-    isPreview = true;
+  isPreview = true;
 if (typeof params["preview"] !== "undefined" && params["preview"] == 0)
-    isPreview = false;
+  isPreview = false;
 
 var workerId = "";
 if (typeof params["workerId"] !== "undefined")
-    workerId = params["workerId"];
+  workerId = params["workerId"];
 
 var vid = "EgKXcQ9PLuc"; // default video ID
 if (params["id"]) {
-    vid = params["id"]
+  vid = params["id"]
 }
 
 var timestamps = [{"start": 154, "end": 290}];
 var player;
 
-function updatePlayerInfo(){
+function updatePlayerInfo() {
   for (var i in timestamps) {
     var peak = timestamps[i];
     // only trigger the first time (video not paused)
@@ -69,11 +69,19 @@ var createPlayer = function () {
 
 pageApp.run(function ($http) {
   createPlayer();
-
-
 });
 
 pageApp.controller("PageCtl", function ($scope, $http) {
   $scope.model = model;
+  $scope.answersVisible = false;
+
+  $scope.showQuestions = function () {
+    $scope.answersVisible = true;
+  };
+
+  $scope.newResponse = function () {
+    alert('foo bar');
+  };
+
 });
 
