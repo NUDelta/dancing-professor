@@ -63,7 +63,7 @@ var workerId = "";
 if (typeof params["workerId"] !== "undefined")
   workerId = params["workerId"];
 
-var vid = "EgKXcQ9PLuc"; // default video ID
+var vid = "2NIG1bt8aPU"; // default video ID
 if (params["id"]) {
   vid = params["id"]
 }
