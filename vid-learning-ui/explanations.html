@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Learner Explanations</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+		</script> 
+		<script type="text/javascript" src="http://masonry.desandro.com/masonry.pkgd.min.js">
+		</script> 
+		
+		<script type="text/javascript"> 
+			$(document).ready(function() 
+			{	
+				$(function listLearnerExplanations() 
+				{
+					$.getJSON( "https://spreadsheets.google.com/feeds/list/1g29ctzMW1bvlmwqn4cSgK9us2SWzvF4ojVnW2GcDhsE/1/public/values?alt=json",
+					function (data) 
+					{
+						$.each(data.feed.entry, function(i,entry) 
+						{	
+							var explanation = entry.gsx$explanation.$t;
+							var item = '<div class="text">' + explanation + '</div>';
+							
+							
+							var baseHeight = 56;
+							var lineHeight = 20;
+							var numberOfLines = Math.floor(explanation.length/45);
+							var height = baseHeight + (lineHeight * numberOfLines);
+							
+							var itemStart = '<div class="item" style="height: ' + height + 'px;">';							
+							var itemEnd = '</div>';
+							
+							$('div#learnerExplanationsList').append(itemStart + item + itemEnd);	
+						});
+					});
+				});
+				
+				setTimeout(function()
+				{
+					var container = $('#learnerExplanationsList');
+					container.masonry(
+					{
+						itemSelector: '.item'
+					});
+				}, 1000);
+			
+				
+					//columnWidth: 200,
+					
+				
+			});
+		</script>
+		
+		<style>
+		body, html
+		{
+		   padding: 0px;
+		   margin: 0px;
+		   background-color: #eeeeee;
+		}
+
+		.Title
+		{
+			font-size:72px; 
+			text-align:center; 
+			width: 100%;
+		}
+
+		.Subtitle
+		{
+			font-size:22px; 
+			text-align:center; 
+			width: 100%;
+		}
+
+		.learnerExplanations
+		{
+			list-style:none;
+			width: 100%;
+		}
+		.item
+		{
+			margin: 15px;;
+			display:block;
+			width: 300px;
+			height: auto;
+			float: left;
+			font-size: 14px;;
+			line-height: 20px;
+			color: rgb(51, 51, 51);	
+			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			padding: 19px;
+			box-shadow: #ccc 1px 2px 5px;
+			border-radius: 3px;
+			color: #333;
+			background-color: #fff;
+			border: 1px solid #aaa;
+			height: 200px;
+			
+		}
+
+		.learnerExplanationsList .item:nth-child(odd){
+		   
+		}
+		
+		.text
+		{
+			font-style: italic;
+
+		}
+		
+		div#learnerExplanationsList
+		{
+			width: 370px;
+		   margin: 0 auto;
+		}
+		
+		/* Small devices (tablets, 740px and up) */
+		@media (min-width: 740px) 
+		{
+			div#learnerExplanationsList
+			{
+				width: 740px;
+			}
+		}
+
+		/* Medium devices (desktops, 1110px and up) */
+		@media (min-width: 1110px) 
+		{
+			div#learnerExplanationsList
+			{
+				width: 1110px;
+			}
+		}
+
+		/* Large devices (large desktops, 1480px and up) */
+		@media (min-width: 1480px) 
+		{
+			div#learnerExplanationsList
+			{
+				width: 1480px;
+			}
+		}
+
+	</style>
+	</head>
+	<body>
+		<div id="Content">   
+			<div id="learnerExplanations">
+				<div class="Title">Learner Explanations</div> 
+				<div class="Subtitle"> The Good, The Bad and The Ugly</div>
+				
+				<div id="learnerExplanationsList" class="container" data-masonry-options='{ "isFitWidth": true }'>
+				</div> 
+			</div>
+		</div>
+	</body>
+</html>
