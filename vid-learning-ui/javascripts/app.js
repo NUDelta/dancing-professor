@@ -23,43 +23,35 @@ var questions = [
     ]
   },
   {
-    question: "What is the foo bim bazz?",
+    question: "Which of these is the best explanation of variance?",
     answers: [
       {
-        image: "answer-2-moderate.png",
-        explanation: "Melius principes concludaturque sed ne, idque luptatum efficiantur vim no, vis an postea vidisse omittantur. Cum cu alia harum praesent, ad etiam clita mel, eam et alii meliore platonem. Ipsum efficiantur qui ei. Te vero magna dicam sit. Ius volumus appellantur in, ut ius tamquam adolescens, sit cu ipsum evertitur reprimique.",
-        correct: false,
-        followUp: "This is close, but we need to square the velocity"
-      }
-    ]
-  },
-  {
-    question: "Which of these is the best explonation of variance?",
-    answers: [
-      {
-        image: "",
+        image: "VarianceI.png",
         explanation: "Variance measures how far a set of numbers is spread out. A variance of zero indicates that all the values are identical.",
         correct: false,
         followUp: "Two sets of data with the same variance can have different spread of data."
-      },{
-        image: "",
+      },
+      {
+        image: "VarianceII.png",
         explanation: 'Variance describes the "spread" of data in a given distribution of values. The variance of data is captured by the deviation of each value from the data\'s average. In the video, Prof. calculates individual deviations by subtracting a datapoint (x) from the overall average (x^hat) and then taking the square root (mostly just to make sure the deviations are described as positive numbers). Finally, the overall "variance" is computed by obtaining the average of the tallied deviations across all values. Thus, distributions with "high variance" mean that the values are "spread" far away from each other. On the other hand, distributions with low variance mean that the datapoints are close to each other.',
         correct: true,
         followUp: "Correct! Good job!"
-      },{
-        image: "",
+      },
+      {
+        image: "VarianceIII.png",
         explanation: "Variance is always non-negative: a small variance indicates that the data points tend to be very close to the median and hence to each other.",
         correct: false,
         followUp: "The variance is measured around the mean not the median."
 
-      },{
-        image: "",
-        explanation: " Variance is calculated by first calculating the mean, then subtracting the mean from every number in the list, creating a new list. To make the new list all positive and workable, you square each value then take an average of the new list."
+      },
+      {
+        image: "VarianceIV.png",
+        explanation: " Variance is calculated by first calculating the mean, then subtracting the mean from every number in the list, creating a new list. To make the new list all positive and workable, you square each value then take an average of the new list.",
         correct: false,
         followUp: "This is a definition of variance but it doesn't give intuition of what variance means."
       }
     ]
-  }]
+  }
 ];
 
 var pageScope = null;
@@ -95,7 +87,7 @@ if (params["id"]) {
   vid = params["id"]
 }
 
-var timestamps = [{"start": 1, "end": 5}];
+var timestamps = [{"start": 280, "end": 290}];
 var player;
 var hasBeenPaused = false;
 
@@ -105,8 +97,11 @@ function updatePlayerInfo() {
     // only trigger the first time (video not paused)
     if (!hasBeenPaused && player.getPlayerState() != 2 && parseInt(player.getCurrentTime()) == parseInt(peak["end"])) {
       document.getElementById("hiddenTrigger").click();
-      player.pauseVideo();
       hasBeenPaused = true;
+    }
+
+    if (parseInt(player.getCurrentTime()) > parseInt(peak["end"]) || parseInt(player.getCurrentTime()) < parseInt(peak["end"])) {
+      hasBeenPaused = false;
     }
   }
 }
@@ -142,38 +137,38 @@ pageApp.controller("PageCtl", function ($scope, $http) {
   $scope.answersVisible = false;
 
   $scope.showQuestions = function () {
-    model.currentQuestion = questions[1];
+    if (parseInt(player.getCurrentTime()) > 30 && parseInt(player.getCurrentTime()) < 60) {
+      $scope.model.currentQuestion = questions[0];
+      $scope.emptyState = false;
+    } else {
+      $scope.emptyState = true;
+    }
 
     if ($scope.answersVisible) {
       $scope.answersVisible = false
     } else {
       $scope.answersVisible = true;
+      player.pauseVideo();
     }
   };
 
   $scope.newResponse = function () {
-    alert('foo bar');
-  };
-
-  $scope.triggerAuto = function () {
-    $scope.model.currentQuestion = questions[0];
+    $scope.emptyState = true;
     $scope.answersVisible = true;
   };
 
+  $scope.triggerAuto = function () {
+    $scope.model.currentQuestion = questions[1];
+    $scope.emptyState = false;
+    $scope.answersVisible = true;
+    player.pauseVideo();
+  };
+
   $scope.proceed = function () {
-    if (!$scope.model.currentQuestion || !$scope.model.currentQuestion.question){
-      return;
-    }
+    $scope.answersVisible = false;
+    $scope.emptyState = false;
 
-    if ($scope.answersVisible) {
-      $scope.answersVisible = false;
-    } else {
-      $scope.answersVisible = true;
-    }
-
-    if (player.getPlayerState() == 2){
-      player.playVideo()
-    }
+    player.playVideo()
   };
 
   $scope.validateAnswer = function (answer) {

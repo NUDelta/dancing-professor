@@ -44,47 +44,44 @@
 
     <div class="row" ng-show="answersVisible">
         <div class="col-xs-12">
-            <hr/>
-            <h3>{{model.currentQuestion.question}}</h3>
-            <ul class="answer-list">
-                <li ng-repeat="answer in model.currentQuestion.answers" class="answer-option"
-                    ng-click="validateAnswer(answer)"
+
+            <div ng-show="emptyState">
+                <hr/>
+                <h3>There is no discussion for this segment of video, add your thoughts!</h3>
+                <p>A sample question you have for this part</p>
+                <textarea style="width:600px; height: 5em;"></textarea>
+                <p>An answer to your question</p>
+                <textarea style="width:600px; height: 5em;"></textarea>
+                <hr/>
+                <button type="submit" title="Submit">Submit</button>
+
+            </div>
+            <div ng-show="!emptyState">
+                <hr/>
+                <h3>{{model.currentQuestion.question}}</h3>
+                <ul class="answer-list">
+                    <li ng-repeat="answer in model.currentQuestion.answers" class="answer-option"
+                        ng-click="validateAnswer(answer)"
                         ng-class="answer.colorRed ? 'red' : answer.colorGreen ? 'green' : '' ">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img ng-src="./images/{{answer.image}}"/>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img ng-src="./images/{{answer.image}}"/>
+                            </div>
+                            <div class="col-xs-8">
+                                <p>{{answer.explanation}}</p>
+
+                                <p ng-show="answer.colorRed || answer.colorGreen" class="followUp">
+                                    {{answer.followUp}}</p>
+                            </div>
                         </div>
-                        <div class="col-xs-8">
-                            <p>{{answer.explanation}}</p>
-                            <p ng-show="answer.colorRed || answer.colorGreen" class="followUp">{{answer.followUp}}</p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
 
 </div>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-</script>
-
-
-    <script type="text/javascript">
-        var explanationFeed;
-        $(document).ready(function()
-        {
-            $(function listLearnerExplanations()
-            {
-                $.getJSON( "https://spreadsheets.google.com/feeds/list/1g29ctzMW1bvlmwqn4cSgK9us2SWzvF4ojVnW2GcDhsE/1/public/values?alt=json",
-                function (data)
-                {
-                    explanationFeed = data.feed;
-                });
-            });
-
-        });
-    </script>
 </body>
 </html>
